@@ -70,7 +70,7 @@ app.post('/alumnos', (req, res) => {
   const nuevoAlumno = new Alumno(username, dni, edad);
   alumnosArray.push(nuevoAlumno);
 
-  res.status(201).send("Alumno creado");
+  res.status(201).send(nuevoAlumno);
 });
 
 app.delete('/alumnos', (req, res) => {
@@ -91,6 +91,10 @@ app.get('/matematica/sumar', (req, res) => {
   const n1 = parseInt(req.query.n1);
   const n2 = parseInt(req.query.n2);
 
+  if (isNaN(n1) || isNaN(n2)) {
+    return res.status(400).send("Parámetros inválidos");
+  }
+
   res.status(200).send(String(sumar(n1, n2)));
 });
 
@@ -98,6 +102,9 @@ app.get('/matematica/restar', (req, res) => {
   const n1 = parseInt(req.query.n1);
   const n2 = parseInt(req.query.n2);
 
+  if (isNaN(n1) || isNaN(n2)) {
+  return res.status(400).send("Parámetros inválidos");
+  }
   res.status(200).send(String(restar(n1, n2)));
 });
 
@@ -105,12 +112,20 @@ app.get('/matematica/multiplicar', (req, res) => {
   const n1 = parseInt(req.query.n1);
   const n2 = parseInt(req.query.n2);
 
+  if (isNaN(n1) || isNaN(n2)) {
+  return res.status(400).send("Parámetros inválidos");
+  }
+
   res.status(200).send(String(multiplicar(n1, n2)));
 });
 
 app.get('/matematica/dividir', (req, res) => {
   const n1 = parseInt(req.query.n1);
   const n2 = parseInt(req.query.n2);
+
+  if (isNaN(n1) || isNaN(n2)) {
+    return res.status(400).send("Parámetros inválidos");
+  }
 
   if (n2 === 0) {
     return res.status(400).send("No se puede dividir por 0");
@@ -126,7 +141,7 @@ app.get('/omdb/searchbypage', async (req, res) => {
     const data = await OMDBSearchByPage(search, p);
     res.status(200).send(data);
   } catch (error) {
-    res.status(500).send("Error en OMDB");
+    res.status(500).send("Hubo un error al consultar OMDB");
   }
 });
 
@@ -137,7 +152,7 @@ app.get('/omdb/searchcomplete', async (req, res) => {
     const data = await OMDBSearchComplete(search);
     res.status(200).send(data);
   } catch (error) {
-    res.status(500).send("Error en OMDB");
+    res.status(500).send("Hubo un error al consultar OMDB");
   }
 });
 
@@ -148,6 +163,6 @@ app.get('/omdb/getbyomdbid', async (req, res) => {
     const data = await OMDBGetByImdbID(imdbID);
     res.status(200).send(data);
   } catch (error) {
-    res.status(500).send("Error en OMDB");
+    res.status(500).send("Hubo un error al consultar OMDB");
   }
 });

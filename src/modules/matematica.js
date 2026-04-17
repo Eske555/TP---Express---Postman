@@ -14,4 +14,4 @@ function dividir(a, b) {
   return a / b;
 }
 
-export { sumar, restar, multiplicar, dividir };
+export {sumar, restar, multiplicar, dividir};
