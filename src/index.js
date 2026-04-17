@@ -94,7 +94,6 @@ app.get('/matematica/sumar', (req, res) => {
   if (isNaN(n1) || isNaN(n2)) {
     return res.status(400).send("Parámetros inválidos");
   }
-
   res.status(200).send(String(sumar(n1, n2)));
 });
 
@@ -115,7 +114,6 @@ app.get('/matematica/multiplicar', (req, res) => {
   if (isNaN(n1) || isNaN(n2)) {
   return res.status(400).send("Parámetros inválidos");
   }
-
   res.status(200).send(String(multiplicar(n1, n2)));
 });
 
@@ -126,11 +124,9 @@ app.get('/matematica/dividir', (req, res) => {
   if (isNaN(n1) || isNaN(n2)) {
     return res.status(400).send("Parámetros inválidos");
   }
-
   if (n2 === 0) {
     return res.status(400).send("No se puede dividir por 0");
   }
-
   res.status(200).send(String(dividir(n1, n2)));
 });
 
